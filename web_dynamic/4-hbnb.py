@@ -6,7 +6,7 @@ from models.state import State
 from models.city import City
 from models.place import Place
 from models.amenity import Amenity
-from uuid import uuid4
+import uuid
 from os import *
 from flask import *
 
@@ -22,7 +22,7 @@ def close_db(error):
     """ Clear current SQLAlchemy session """
     storage.close()
 
-@app.route('/1-hbnb/')
+@app.route('/4-hbnb/')
 def hbnb():
     """ handle requests to templates """
     states = storage.all(State).values()
@@ -35,10 +35,10 @@ def hbnb():
     amenitites = storage.all(Amenity).values()
     amenities = sorted(amenities, key=lambda k: k.name)
     places = storage.all(Place).values()
-    places = sorted(places, key=lambda k: k.name)
+    places = sorted(amenities, key=lambda k: k.name)
     cache_id = str(uuid.uuid4())
 
-    return render_template('1-hbnb.html',
+    return render_template('4-hbnb.html',
                            states=st_ct,
                            places=places,
                            amenities=amenities,
